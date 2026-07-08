@@ -78,7 +78,7 @@ export function QuoteBanner() {
               className="quote-word"
               initial={{ opacity: 0, x: offset, filter: "blur(8px)" }}
               whileInView={{ opacity: 1, x: 0, filter: "blur(0px)" }}
-              viewport={{ once: false, amount: 0.6 }}
+              viewport={{ once: true, amount: 0.1 }}
               transition={{
                 delay,
                 duration: 0.8,

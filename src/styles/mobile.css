@@ -83,36 +83,11 @@ body {
    scale the whole globe down to fit and compensate the layout height so it
    sits centered with no gap. Scaling preserves geometry + interaction.
    ============================================================================ */
+/* Globe centering is handled inside Globe.tsx (responsive SIZE prop measured
+   from the container). Just make sure the sizer centers it on mobile. */
 @media (max-width: 768px) {
   .globe-sizer {
-    overflow: visible;
-    /* scaled height = 520 * (340/520) = 340 */
-    height: 340px;
-    align-items: center;
-  }
-  .globe-root {
-    transform: scale(0.6538); /* 340 / 520 */
-    transform-origin: center center;
-    flex-shrink: 0;
-  }
-}
-
-@media (max-width: 480px) {
-  .globe-sizer {
-    /* scaled height = 520 * (280/520) = 280 */
-    height: 280px;
-  }
-  .globe-root {
-    transform: scale(0.5385); /* 280 / 520 */
-  }
-}
-
-@media (max-width: 360px) {
-  .globe-sizer {
-    height: 250px;
-  }
-  .globe-root {
-    transform: scale(0.4808); /* 250 / 520 */
+    justify-content: center;
   }
 }
 
@@ -146,16 +121,24 @@ body {
    untouched (these rules live inside max-width media queries).
    ============================================================================ */
 
-/* Contact "Let's build something." — 40px floor overflows <=360px */
+/* Contact "Let's build something." — must NOT split words mid-spelling.
+   Break only at spaces (normal wrapping); shrink the font so the longest
+   word ("something.") fits on one line at each width. */
 @media (max-width: 480px) {
   .contact-title {
-    font-size: clamp(30px, 11vw, 52px) !important;
-    word-break: break-word;
-    overflow-wrap: break-word;
+    font-size: clamp(28px, 9vw, 48px) !important;
+    word-break: normal !important;
+    overflow-wrap: normal !important;
+    white-space: normal !important;
   }
 }
-@media (max-width: 360px) {
+@media (max-width: 380px) {
   .contact-title {
-    font-size: clamp(26px, 10vw, 40px) !important;
+    font-size: 30px !important;   /* "something." ~= 300px < 380 viewport */
+  }
+}
+@media (max-width: 340px) {
+  .contact-title {
+    font-size: 26px !important;
   }
 }

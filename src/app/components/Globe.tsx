@@ -47,29 +47,27 @@ function fibonacciSphere(n: number) {
 
 const FIB_POINTS = fibonacciSphere(N);
 
-/* ── Geometry ─────────────────────────────────────────────────────────── */
-const SIZE    = 520;
-const CX      = SIZE / 2;
-const CY      = SIZE / 2;
-const R       = 188;
-const SPEED   = 4;       // °/s
-const ICON_S  = 68;
-const ICON_I  = 32;
-const HALF    = ICON_S / 2;
+/* ── Geometry (base = 520px desktop; everything scales from BASE) ──────── */
+const BASE    = 520;         // reference design size
+const SPEED   = 4;           // °/s
+const R_RATIO   = 188 / BASE;
+const ICON_RATIO = 68 / BASE;
+const ICONI_RATIO = 32 / BASE;
 
 const MERIDIAN_STEP  = 12;   // 30 meridians
 const PARALLEL_STEP  = 7.5;  // 23 parallels
 
-/* ── Starfield ────────────────────────────────────────────────────────── */
+/* ── Starfield (unit coords 0..1, scaled by size at draw time) ────────── */
 const STARS = Array.from({ length: 110 }, () => ({
-  x: Math.random() * SIZE,
-  y: Math.random() * SIZE,
+  x: Math.random(),
+  y: Math.random(),
   r: Math.random() * 1.2 + 0.25,
   a: Math.random() * 0.55 + 0.12,
 }));
 
 /* ── Project Fibonacci point with Y-axis rotation ─────────────────────── */
-function project(pt: { x: number; y: number; z: number }, rotDeg: number) {
+function project(pt: { x: number; y: number; z: number }, rotDeg: number, size: number) {
+  const CX = size / 2, CY = size / 2, R = size * R_RATIO;
   const r    = (rotDeg * Math.PI) / 180;
   const cosR = Math.cos(r), sinR = Math.sin(r);
   const x2   = pt.x * cosR - pt.z * sinR;
@@ -82,11 +80,13 @@ function project(pt: { x: number; y: number; z: number }, rotDeg: number) {
 }
 
 /* ── Canvas draw ─────────────────────────────────────────────────────── */
-function drawScene(ctx: CanvasRenderingContext2D, rotY: number) {
+function drawScene(ctx: CanvasRenderingContext2D, rotY: number, size: number) {
+  const SIZE = size, CX = size / 2, CY = size / 2, R = size * R_RATIO;
   ctx.clearRect(0, 0, SIZE, SIZE);
 
   /* Stars */
-  STARS.forEach(({ x, y, r, a }) => {
+  STARS.forEach(({ x: ux, y: uy, r, a }) => {
+    const x = ux * SIZE, y = uy * SIZE;
     ctx.beginPath();
     ctx.arc(x, y, r, 0, Math.PI * 2);
     ctx.fillStyle = `rgba(255,255,255,${a})`;
@@ -170,12 +170,32 @@ function drawScene(ctx: CanvasRenderingContext2D, rotY: number) {
 
 /* ── Component ───────────────────────────────────────────────────────── */
 export function Globe() {
+  const wrapRef    = useRef<HTMLDivElement>(null);
   const canvasRef  = useRef<HTMLCanvasElement>(null);
   const rotYRef    = useRef(0);
   const rafRef     = useRef(0);
   const lastRef    = useRef(0);
   const [rotY,    setRotY]    = useState(0);
   const [hovered, setHovered] = useState<string | null>(null);
+  const [size,    setSize]    = useState(BASE);   // responsive canvas size
+
+  const sizeRef = useRef(size);
+  sizeRef.current = size;
+
+  /* Measure container and pick a fitting size (capped at BASE=520 for desktop) */
+  useEffect(() => {
+    function measure() {
+      const el = wrapRef.current;
+      if (!el) return;
+      // available width = parent width (the .globe-sizer), minus a little gutter
+      const avail = (el.parentElement?.clientWidth ?? el.clientWidth ?? BASE);
+      const next = Math.max(220, Math.min(BASE, Math.floor(avail)));
+      setSize(next);
+    }
+    measure();
+    window.addEventListener("resize", measure);
+    return () => window.removeEventListener("resize", measure);
+  }, []);
 
   useEffect(() => {
     function frame(now: number) {
@@ -185,7 +205,7 @@ export function Globe() {
       const canvas = canvasRef.current;
       if (canvas) {
         const ctx = canvas.getContext("2d");
-        if (ctx) drawScene(ctx, rotYRef.current);
+        if (ctx) drawScene(ctx, rotYRef.current, sizeRef.current);
       }
       setRotY(rotYRef.current);
       rafRef.current = requestAnimationFrame(frame);
@@ -194,10 +214,15 @@ export function Globe() {
     return () => cancelAnimationFrame(rafRef.current);
   }, []);
 
+  const R      = size * R_RATIO;
+  const ICON_S = size * ICON_RATIO;
+  const ICON_I = size * ICONI_RATIO;
+  const HALF   = ICON_S / 2;
+
   /* Project all icons */
   const positioned = SKILLS.map((skill, i) => ({
     ...skill,
-    ...project(FIB_POINTS[i], rotY),
+    ...project(FIB_POINTS[i], rotY, size),
   }));
 
   const back  = positioned.filter((ic) => ic.depth <= 0).sort((a, b) => a.depth - b.depth);
@@ -209,7 +234,7 @@ export function Globe() {
     const isHov  = hovered === ic.label;
     const opacity = isBack ? 0.12 + t * 0.20 : 0.55 + t * 0.45;
     const baseScale = 0.60 + t * 0.40;
-    const showAbove = ic.sy > SIZE * 0.38;
+    const showAbove = ic.sy > size * 0.38;
 
     return (
       <div
@@ -281,12 +306,12 @@ export function Globe() {
   };
 
   return (
-    <div className="globe-root" style={{ position: "relative", width: SIZE, height: SIZE, maxWidth: "100%" }}>
+    <div ref={wrapRef} className="globe-root" style={{ position: "relative", width: size, height: size, maxWidth: "100%" }}>
       {back.map(renderIcon)}
       <canvas
         ref={canvasRef}
-        width={SIZE}
-        height={SIZE}
+        width={size}
+        height={size}
         style={{ position: "absolute", inset: 0, pointerEvents: "none" }}
       />
       {front.map(renderIcon)}

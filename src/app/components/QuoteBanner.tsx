@@ -48,6 +48,7 @@ export function QuoteBanner() {
 
       {/* The quote — word-by-word reveal, one line */}
       <h2
+        className="quote-line"
         style={{
           position: "relative",
           fontFamily: "'Playfair Display', serif",

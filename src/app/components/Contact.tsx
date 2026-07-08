@@ -37,7 +37,7 @@ export function Contact() {
             Contact
           </p>
 
-          <h2 style={{
+          <h2 className="contact-title" style={{
             fontFamily:    "'Syne', sans-serif",
             fontSize:      "clamp(40px, 6vw, 72px)",
             fontWeight:     800,

@@ -281,7 +281,7 @@ export function Globe() {
   };
 
   return (
-    <div style={{ position: "relative", width: SIZE, height: SIZE, maxWidth: "100%" }}>
+    <div className="globe-root" style={{ position: "relative", width: SIZE, height: SIZE, maxWidth: "100%" }}>
       {back.map(renderIcon)}
       <canvas
         ref={canvasRef}

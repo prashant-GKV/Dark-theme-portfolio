@@ -1,0 +1,161 @@
+/* ============================================================================
+   MOBILE RESPONSIVENESS OVERRIDES
+   ----------------------------------------------------------------------------
+   Every rule here is scoped inside a max-width media query so DESKTOP styling
+   is never affected. The components use inline styles (desktop source of
+   truth); these class hooks only take effect at mobile breakpoints.
+   Imported LAST in index.css so it wins the cascade over inline styles via
+   !important where inline styles would otherwise override a stylesheet.
+   ============================================================================ */
+
+/* Global safety net — never allow horizontal scroll */
+html,
+body {
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
+/* ============================================================================
+   HERO — tasks 1 & 2
+   ============================================================================ */
+@media (max-width: 768px) {
+  /* Task 2: stack the two columns and center everything on mobile.
+     Desktop keeps its row layout (this only applies <=768px). */
+  .hero-main {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  /* Right column: center its contents instead of left-aligning */
+  .hero-right {
+    align-items: center;
+    text-align: center;
+    width: 100%;
+  }
+
+  /* Task 1: role text — allow it to wrap and reserve height so the
+     typewriter cycling can never shift the content below it.
+     min-height covers up to 2 lines at the mobile font size. */
+  .hero-role {
+    white-space: normal !important;
+    word-break: break-word;
+    overflow-wrap: break-word;
+    text-align: center;
+  }
+  .hero-role-wrap {
+    /* Reserve a FIXED height that always fits the longest role across two
+       lines, so the typewriter can never shift the content below it.
+       Locked in px (not em) because the wrapper's own font-size differs from
+       the role heading's. Sized for the 2-line max at this breakpoint. */
+    height: 110px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
+
+  /* Chat input + CTA rows: center and let them use full width */
+  .hero-chat-row {
+    width: 100%;
+    max-width: 480px !important;
+    justify-content: center;
+  }
+  .hero-cta-row {
+    justify-content: center;
+  }
+}
+
+/* Very small phones (<=380px): the role can be two lines, reserve a touch
+   more height and shrink slightly so "Full Stack Developer" fits cleanly. */
+@media (max-width: 380px) {
+  .hero-role {
+    font-size: clamp(22px, 8vw, 30px) !important;
+  }
+  .hero-role-wrap {
+    height: 82px;   /* 2 lines at ~30px + breathing room */
+  }
+}
+
+/* ============================================================================
+   GLOBE — task 4
+   The Globe renders at a fixed 520px (canvas + absolutely-positioned icons).
+   Constraining only the wrapper leaves the 520px content overflowing, so we
+   scale the whole globe down to fit and compensate the layout height so it
+   sits centered with no gap. Scaling preserves geometry + interaction.
+   ============================================================================ */
+@media (max-width: 768px) {
+  .globe-sizer {
+    overflow: visible;
+    /* scaled height = 520 * (340/520) = 340 */
+    height: 340px;
+    align-items: center;
+  }
+  .globe-root {
+    transform: scale(0.6538); /* 340 / 520 */
+    transform-origin: center center;
+    flex-shrink: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .globe-sizer {
+    /* scaled height = 520 * (280/520) = 280 */
+    height: 280px;
+  }
+  .globe-root {
+    transform: scale(0.5385); /* 280 / 520 */
+  }
+}
+
+@media (max-width: 360px) {
+  .globe-sizer {
+    height: 250px;
+  }
+  .globe-root {
+    transform: scale(0.4808); /* 250 / 520 */
+  }
+}
+
+/* ============================================================================
+   QUOTE BANNER — task 5
+   Desktop keeps the single-line nowrap look; on mobile let it wrap so the
+   full sentence is visible with no clipping.
+   ============================================================================ */
+@media (max-width: 768px) {
+  .quote-line {
+    flex-wrap: wrap !important;
+    white-space: normal !important;
+    word-break: break-word;
+    overflow-wrap: break-word;
+    max-width: 100% !important;
+    padding: 0 8px;
+  }
+}
+
+/* On small phones shrink the quote so it fits comfortably */
+@media (max-width: 420px) {
+  .quote-line {
+    font-size: clamp(18px, 6.5vw, 26px) !important;
+  }
+}
+
+/* ============================================================================
+   SECTION HEADINGS / FLUID TYPE — task 3
+   Fix headings whose clamp() floor is too large for tiny screens, causing
+   horizontal overflow. Lower the floor on mobile only; desktop clamp is
+   untouched (these rules live inside max-width media queries).
+   ============================================================================ */
+
+/* Contact "Let's build something." — 40px floor overflows <=360px */
+@media (max-width: 480px) {
+  .contact-title {
+    font-size: clamp(30px, 11vw, 52px) !important;
+    word-break: break-word;
+    overflow-wrap: break-word;
+  }
+}
+@media (max-width: 360px) {
+  .contact-title {
+    font-size: clamp(26px, 10vw, 40px) !important;
+  }
+}

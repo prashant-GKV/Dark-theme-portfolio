@@ -188,7 +188,7 @@ export function Hero({ onChatOpen }: { onChatOpen: (msg?: string) => void }) {
       }} />
 
       {/* ── Two-column main area ── */}
-      <div style={{
+      <div className="hero-main" style={{
         flex:       1,
         display:    "flex",
         alignItems: "center",
@@ -367,6 +367,7 @@ export function Hero({ onChatOpen }: { onChatOpen: (msg?: string) => void }) {
 
         {/* ────────────── RIGHT COLUMN (60%) ────────────── */}
         <motion.div
+          className="hero-right"
           initial={{ opacity: 0, x: 40 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
@@ -392,11 +393,12 @@ export function Hero({ onChatOpen }: { onChatOpen: (msg?: string) => void }) {
 
           {/* Role */}
           <motion.div
+            className="hero-role-wrap"
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.35 }}
           >
-            <h2 style={{
+            <h2 className="hero-role" style={{
               fontFamily:    "'Syne', sans-serif",
               fontSize:      "clamp(24px, 3.6vw, 46px)",
               fontWeight:     800,
@@ -510,6 +512,7 @@ export function Hero({ onChatOpen }: { onChatOpen: (msg?: string) => void }) {
 
           {/* AI Chat input */}
           <motion.div
+            className="hero-chat-row"
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.1 }}
@@ -565,6 +568,7 @@ export function Hero({ onChatOpen }: { onChatOpen: (msg?: string) => void }) {
 
           {/* CTA buttons */}
           <motion.div
+            className="hero-cta-row"
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.2 }}

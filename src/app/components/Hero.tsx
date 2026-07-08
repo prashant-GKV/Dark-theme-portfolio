@@ -140,14 +140,16 @@ function H({ children, g }: { children: ReactNode; g: string }) {
   );
 }
 
-// gradient presets
+// Unified accent — every highlighted keyword uses the site's signature
+// cyan→purple gradient for a clean, cohesive, professional look.
+const ACCENT = "linear-gradient(135deg, #06B6D4, #6D28D9)";
 const G = {
-  cyanPurple:  "linear-gradient(135deg, #06B6D4, #6D28D9)",
-  emeraldCyan: "linear-gradient(135deg, #10B981, #06B6D4)",
-  purpleBlue:  "linear-gradient(135deg, #6D28D9, #2563EB)",
-  pinkPurple:  "linear-gradient(135deg, #E040FB, #6D28D9)",
-  blueCyan:    "linear-gradient(135deg, #2563EB, #06B6D4)",
-  purplePink:  "linear-gradient(135deg, #6D28D9, #E040FB)",
+  cyanPurple:  ACCENT,
+  emeraldCyan: ACCENT,
+  purpleBlue:  ACCENT,
+  pinkPurple:  ACCENT,
+  blueCyan:    ACCENT,
+  purplePink:  ACCENT,
 };
 
 /* ── Component ───────────────────────────────────────────────────────── */

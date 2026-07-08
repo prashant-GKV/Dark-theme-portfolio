@@ -164,7 +164,7 @@ export function Hero({ onChatOpen }: { onChatOpen: (msg?: string) => void }) {
     fontFamily: "'Inter', sans-serif",
     fontSize:    16,
     lineHeight:  1.8,
-    color:       "#8892B0",
+    color:       "#CBD5E1",
     margin:       0,
   };
 

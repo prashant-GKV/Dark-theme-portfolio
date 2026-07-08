@@ -67,21 +67,19 @@ export function QuoteBanner() {
         }}
       >
         {words.map((word, i) => {
-          const mid = (words.length - 1) / 2;
-          // words split apart from the centre: left half enters from the
-          // left, right half from the right, distance grows toward the edges
-          const offset = (i - mid) * 80;
-          const delay = 0.1 + Math.abs(i - mid) * 0.14;
+          // Clean fade + rise reveal (no horizontal offset, so no word can
+          // ever land off-screen / clipped — fixes "Great" being cut off).
+          const delay = 0.08 + i * 0.1;
           return (
             <motion.span
               key={i}
               className="quote-word"
-              initial={{ opacity: 0, x: offset, filter: "blur(8px)" }}
-              whileInView={{ opacity: 1, x: 0, filter: "blur(0px)" }}
+              initial={{ opacity: 0, y: 14, filter: "blur(6px)" }}
+              whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
               viewport={{ once: true, amount: 0.1 }}
               transition={{
                 delay,
-                duration: 0.8,
+                duration: 0.6,
                 ease: [0.16, 1, 0.3, 1],
               }}
               whileHover={{ y: -5, scale: 1.05, color: "#FFFFFF" }}

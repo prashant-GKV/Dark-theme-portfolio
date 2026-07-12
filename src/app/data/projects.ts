@@ -2,6 +2,10 @@ export interface Project {
   id: string;
   name: string;
   image: string;
+  /** How the screenshot fills its frame. Defaults to "cover". */
+  imageFit?: "cover" | "contain";
+  /** CSS aspect-ratio for the screenshot frame. Defaults to "16 / 10". */
+  imageAspect?: string;
   description: string;
   tech: string[];
   githubUrl?: string; // to be filled in later
@@ -12,13 +16,16 @@ export interface Project {
 // are wrapped in encodeURI() to stay valid URLs.
 export const PROJECTS: Project[] = [
   {
-    id: "ai-resume-analyzer",
-    name: "AI Resume Analyzer",
-    image: encodeURI("/projects/AI Resume Analyzer.png"),
+    id: "hire-ready",
+    name: "Hire Ready",
+    image: encodeURI("/projects/Hire Ready.gif"),
+    imageFit: "contain",
+    imageAspect: "1526 / 806",
     description:
-      "An AI-powered resume analyzer that scores resumes against ATS systems, highlights weak bullet points, suggests missing keywords, and generates an improved version tailored to the target role.",
+      "An AI-powered hiring prep platform: upload your resume and the AI analyzes it, then conducts a mock interview with questions tailored to your resume — helping you fix weak points and walk into real interviews prepared.",
     tech: ["Next.js", "TypeScript", "Claude API", "Tailwind CSS"],
-    githubUrl: "",
+    githubUrl: "https://github.com/prashant-GKV/ai-interviewer-and-resume-analyser",
+    liveUrl: "https://ai-interviewer-and-resume-analyser.vercel.app/",
   },
   {
     id: "online-voting-system",

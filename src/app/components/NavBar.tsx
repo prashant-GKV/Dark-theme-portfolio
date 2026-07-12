@@ -8,7 +8,7 @@ const NAV_LINKS = [
   { label: "About",    href: "#about"    },
   { label: "Projects", href: "#projects" },
   { label: "Skills",   href: "#skills"   },
-  { label: "Certs",    href: "#more"     },
+  { label: "Certifications", href: "#more" },
   { label: "Contact",  href: "#contact"  },
 ];
 
@@ -134,7 +134,7 @@ export function NavBar() {
                   borderRadius:   8,
                   fontFamily:    "'Space Grotesk', sans-serif",
                   fontSize:       14,
-                  fontWeight:     isActive ? 600 : 500,
+                  fontWeight:     700,
                   color:          isActive ? "#F0F4FF" : "#8892B0",
                   letterSpacing: "0.01em",
                   transition:    "color 0.2s, background 0.2s",

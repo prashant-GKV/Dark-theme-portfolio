@@ -52,7 +52,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
         <div
           style={{
             position: "relative",
-            aspectRatio: "16 / 10",
+            aspectRatio: project.imageAspect ?? "16 / 10",
             overflow: "hidden",
             background: "linear-gradient(135deg, rgba(109,40,217,0.25), rgba(6,182,212,0.18))",
           }}
@@ -65,8 +65,8 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
             style={{
               width: "100%",
               height: "100%",
-              objectFit: "cover",
-              objectPosition: "top",
+              objectFit: project.imageFit ?? "cover",
+              objectPosition: project.imageFit === "contain" ? "center" : "top",
               display: "block",
               transition: "transform 0.5s ease",
             }}

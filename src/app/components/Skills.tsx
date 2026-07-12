@@ -17,7 +17,7 @@ const skillCategories: { label: string; accent: string; skills: SkillEntry[] }[]
     accent: "#06B6D4",
     skills: [
       { name: "HTML5",      Icon: SiHtml5,       color: "#E34F26" },
-      { name: "CSS3",       Icon: SiCss,         color: "#2965F1" },
+      { name: "CSS",        Icon: SiCss,         color: "#2965F1" },
       { name: "JavaScript", Icon: SiJavascript,  color: "#F7DF1E" },
       { name: "React",      Icon: SiReact,       color: "#61DAFB" },
       { name: "Next.js",    Icon: SiNextdotjs,   color: "#ffffff" },

@@ -2,6 +2,8 @@
 
 Personal portfolio site of **Prashant Saini** — Full Stack Developer, AI Enthusiast, Cloud Learner, and Data Analyst.
 
+**Live:** [prashant-portfolio-neon.vercel.app](https://prashant-portfolio-neon.vercel.app/)
+
 ## Overview
 
 Single-page React portfolio built with Vite, TypeScript, and Tailwind CSS, wrapped in a dark, aurora-lit visual theme. Features an animated aurora background, a rotating globe pinned to the owner's location, a project showcase, a skills breakdown, and an AI chatbot that answers questions about the owner using a built-in knowledge base.

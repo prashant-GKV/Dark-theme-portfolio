@@ -2,9 +2,6 @@
 
 Personal portfolio site of **Prashant Saini** — Full Stack Developer, AI Enthusiast, Cloud Learner, and Data Analyst.
 
-**Live:** [prashant-saini.vercel.app](https://prashant-saini.vercel.app/)
-**Repo:** [prashant-GKV/Dark-theme-portfolio](https://github.com/prashant-GKV/Dark-theme-portfolio)
-
 ## Overview
 
 Single-page React portfolio built with Vite, TypeScript, and Tailwind CSS, wrapped in a dark, aurora-lit visual theme. Features an animated aurora background, a rotating globe pinned to the owner's location, a project showcase, a skills breakdown, and an AI chatbot that answers questions about the owner using a built-in knowledge base.
@@ -64,10 +61,6 @@ npm run build
 ```
 
 The dev server runs on Vite's default port (falls back to the next free port if `5173` is taken).
-
-## Deployment
-
-Deployed on **Vercel**: https://prashant-saini.vercel.app/
 
 ## Connect
 

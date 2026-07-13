@@ -8,7 +8,7 @@ interface Message {
   content: string;
 }
 
-/* Simple rule-based chatbot — works instantly without API key */
+/* Rule-based fallback — used if the Gemini API call fails */
 function getResponse(input: string): string {
   const q = input.toLowerCase();
 
@@ -84,19 +84,30 @@ export function ChatBot({ initialMessage }: { initialMessage?: string }) {
     endRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, typing]);
 
-  const handleSend = (text?: string) => {
+  const handleSend = async (text?: string) => {
     const msg = (text ?? input).trim();
     if (!msg) return;
 
+    const history = messages.slice(-8);
     setMessages((prev) => [...prev, { role: "user", content: msg }]);
     setInput("");
     setTyping(true);
 
-    setTimeout(() => {
-      const response = getResponse(msg);
-      setMessages((prev) => [...prev, { role: "assistant", content: response }]);
+    try {
+      const res = await fetch("/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message: msg, history }),
+      });
+      if (!res.ok) throw new Error("chat api failed");
+      const data = await res.json();
+      const reply = (data.reply as string)?.trim();
+      setMessages((prev) => [...prev, { role: "assistant", content: reply || getResponse(msg) }]);
+    } catch {
+      setMessages((prev) => [...prev, { role: "assistant", content: getResponse(msg) }]);
+    } finally {
       setTyping(false);
-    }, 600 + Math.random() * 400);
+    }
   };
 
   return (

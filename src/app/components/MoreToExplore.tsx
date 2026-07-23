@@ -576,7 +576,7 @@ export function MoreToExplore() {
   const [modal, setModal] = useState<ModalType>(null);
 
   return (
-    <section id="more" style={{ position:"relative", zIndex:1, padding:"clamp(60px,8vw,100px) clamp(20px,5vw,8%)", overflow:"hidden" }}>
+    <section id="more" data-portfolio-section="Certifications, Experience & Achievements" style={{ position:"relative", zIndex:1, padding:"clamp(60px,8vw,100px) clamp(20px,5vw,8%)", overflow:"hidden" }}>
 
       {/* Local glow accents */}
       <div style={{ position:"absolute", top:"15%", left:"5%", width:500, height:500, background:"radial-gradient(circle, rgba(109,40,217,0.12) 0%, transparent 70%)", filter:"blur(60px)", pointerEvents:"none" }} />

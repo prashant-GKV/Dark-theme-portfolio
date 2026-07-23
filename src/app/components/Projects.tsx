@@ -54,7 +54,9 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
             position: "relative",
             aspectRatio: project.imageAspect ?? "16 / 10",
             overflow: "hidden",
-            background: "linear-gradient(135deg, rgba(109,40,217,0.25), rgba(6,182,212,0.18))",
+            background:
+              project.imageBackground ??
+              "linear-gradient(135deg, rgba(109,40,217,0.25), rgba(6,182,212,0.18))",
           }}
         >
           <img
@@ -205,6 +207,7 @@ export function Projects() {
   return (
     <section
       id="projects"
+      data-portfolio-section="Projects"
       style={{
         position: "relative",
         zIndex: 1,

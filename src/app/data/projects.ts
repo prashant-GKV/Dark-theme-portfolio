@@ -6,6 +6,8 @@ export interface Project {
   imageFit?: "cover" | "contain";
   /** CSS aspect-ratio for the screenshot frame. Defaults to "16 / 10". */
   imageAspect?: string;
+  /** Frame background behind a "contain" screenshot. Defaults to the purple/cyan gradient. */
+  imageBackground?: string;
   description: string;
   tech: string[];
   githubUrl?: string; // to be filled in later
@@ -20,12 +22,26 @@ export const PROJECTS: Project[] = [
     name: "Hire Ready",
     image: encodeURI("/projects/Hire Ready.gif"),
     imageFit: "contain",
-    imageAspect: "1526 / 806",
+    imageAspect: "16 / 10",
+    imageBackground: "#FFFFFF",
     description:
       "An AI-powered hiring prep platform: upload your resume and the AI analyzes it, then conducts a mock interview with questions tailored to your resume — helping you fix weak points and walk into real interviews prepared.",
     tech: ["Next.js", "TypeScript", "Claude API", "Tailwind CSS"],
     githubUrl: "https://github.com/prashant-GKV/ai-interviewer-and-resume-analyser",
     liveUrl: "https://ai-interviewer-and-resume-analyser.vercel.app/",
+  },
+  {
+    id: "guardian-eye",
+    name: "GuardianEye",
+    image: encodeURI("/projects/GuardianEye.png"),
+    imageFit: "contain",
+    imageAspect: "16 / 10",
+    imageBackground: "#F7F8FA",
+    description:
+      "Real-time webcam driver monitoring — it reads eye closure, yawns and head pose entirely in the browser, then escalates through visual, audio and spoken alerts the moment fatigue sets in.",
+    tech: ["Next.js", "TypeScript", "FastAPI", "MediaPipe"],
+    githubUrl: "https://github.com/prashant-GKV/guardianEye",
+    liveUrl: "https://guardian-eye-theta.vercel.app",
   },
   {
     id: "online-voting-system",

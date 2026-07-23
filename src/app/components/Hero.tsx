@@ -173,6 +173,7 @@ export function Hero({ onChatOpen }: { onChatOpen: (msg?: string) => void }) {
   return (
     <section
       id="hero"
+      data-portfolio-section="Hero"
       style={{
         minHeight:     "100vh",
         position:      "relative",

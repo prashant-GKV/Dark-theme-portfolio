@@ -93,6 +93,7 @@ export function About() {
   return (
     <section
       id="about"
+      data-portfolio-section="About"
       style={{
         position: "relative",
         zIndex:    1,

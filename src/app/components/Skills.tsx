@@ -2,9 +2,11 @@ import { type ElementType } from "react";
 import { motion } from "motion/react";
 import {
   SiHtml5, SiCss, SiJavascript, SiReact, SiNextdotjs, SiTailwindcss,
-  SiNodedotjs, SiExpress, SiMongodb, SiMysql,
+  SiFramer, SiVite,
+  SiNodedotjs, SiExpress, SiFastapi, SiMongodb, SiMysql,
+  SiPostgresql, SiPrisma, SiSupabase,
   SiPython, SiCplusplus, SiTypescript,
-  SiPandas, SiNumpy, SiDocker, SiGit,
+  SiPandas, SiNumpy, SiScikitlearn, SiStreamlit, SiDocker, SiGit,
   SiVercel, SiNetlify,
 } from "react-icons/si";
 import { Globe } from "./Globe";
@@ -22,16 +24,22 @@ const skillCategories: { label: string; accent: string; skills: SkillEntry[] }[]
       { name: "React",      Icon: SiReact,       color: "#61DAFB" },
       { name: "Next.js",    Icon: SiNextdotjs,   color: "#ffffff" },
       { name: "Tailwind",   Icon: SiTailwindcss, color: "#06B6D4" },
+      { name: "Framer Motion", Icon: SiFramer,   color: "#E040FB" },
+      { name: "Vite",       Icon: SiVite,        color: "#B24BF3" },
     ],
   },
   {
     label: "Backend",
     accent: "#7C3AED",
     skills: [
-      { name: "Node.js", Icon: SiNodedotjs, color: "#339933" },
-      { name: "Express", Icon: SiExpress,   color: "#aaa"    },
-      { name: "MongoDB", Icon: SiMongodb,   color: "#47A248" },
-      { name: "MySQL",   Icon: SiMysql,     color: "#4479A1" },
+      { name: "Node.js",    Icon: SiNodedotjs,  color: "#339933" },
+      { name: "Express",    Icon: SiExpress,    color: "#aaa"    },
+      { name: "FastAPI",    Icon: SiFastapi,    color: "#009688" },
+      { name: "MongoDB",    Icon: SiMongodb,    color: "#47A248" },
+      { name: "MySQL",      Icon: SiMysql,      color: "#4479A1" },
+      { name: "PostgreSQL", Icon: SiPostgresql, color: "#4169E1" },
+      { name: "Prisma",     Icon: SiPrisma,     color: "#5A67D8" },
+      { name: "Supabase",   Icon: SiSupabase,   color: "#3ECF8E" },
     ],
   },
   {
@@ -48,12 +56,14 @@ const skillCategories: { label: string; accent: string; skills: SkillEntry[] }[]
     label: "Cloud & Tools",
     accent: "#10B981",
     skills: [
-      { name: "Pandas",  Icon: SiPandas,  color: "#150458" },
-      { name: "NumPy",   Icon: SiNumpy,   color: "#4DABCF" },
-      { name: "Docker",  Icon: SiDocker,  color: "#2496ED" },
-      { name: "Git",     Icon: SiGit,     color: "#F05032" },
-      { name: "Vercel",  Icon: SiVercel,  color: "#ffffff" },
-      { name: "Netlify", Icon: SiNetlify, color: "#00C7B7" },
+      { name: "Pandas",       Icon: SiPandas,      color: "#150458" },
+      { name: "NumPy",        Icon: SiNumpy,       color: "#4DABCF" },
+      { name: "scikit-learn", Icon: SiScikitlearn, color: "#F7931E" },
+      { name: "Streamlit",    Icon: SiStreamlit,   color: "#FF4B4B" },
+      { name: "Docker",       Icon: SiDocker,      color: "#2496ED" },
+      { name: "Git",          Icon: SiGit,         color: "#F05032" },
+      { name: "Vercel",       Icon: SiVercel,      color: "#ffffff" },
+      { name: "Netlify",      Icon: SiNetlify,     color: "#00C7B7" },
     ],
   },
 ];
@@ -154,6 +164,7 @@ export function Skills() {
   return (
     <section
       id="skills"
+      data-portfolio-section="Skills"
       style={{
         position:      "relative",
         zIndex:         1,

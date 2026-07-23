@@ -14,6 +14,7 @@ export function Contact() {
   return (
     <section
       id="contact"
+      data-portfolio-section="Contact"
       style={{
         position:  "relative",
         zIndex:     1,
